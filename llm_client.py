@@ -8,6 +8,7 @@ def gpt4():
         deployment_name="gpt-4",
         temperature=0,
         model_kwargs={
+            'seed': 42,
             'stop': [
                 "<|im_end|>",
                 "</s>",
@@ -24,6 +25,7 @@ def gpt3_5():
         deployment_name="gpt-35-turbo",
         temperature=0,
         model_kwargs={
+            'seed': 42,
             'stop': [
                 "<|im_end|>",
                 "</s>",
@@ -33,5 +35,19 @@ def gpt3_5():
     )
 
 
-def qiwen():
-    pass
+def qwen72b():
+    load_dotenv('env/qwen72b.env', verbose=True)
+    from langchain_openai import ChatOpenAI
+    return ChatOpenAI(
+        model_name="qwen1.5-72b-chat-int4",
+        max_tokens=300,
+        temperature=0,
+        model_kwargs={
+            'seed': 42,
+            'stop': [
+                "<|im_end|>",
+                "</s>",
+                "\n\n\n"
+            ]
+        }
+    )
